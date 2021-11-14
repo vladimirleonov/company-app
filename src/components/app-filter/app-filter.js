@@ -1,20 +1,30 @@
 import "./app-filter.css";
 
-const AppFilter = () => {
+const AppFilter = ({filterBtns}) => {
+
     return (
         <div className="btn-group">
-            <button type="button"
-                    className="btn btn-light">
+            {filterBtns.map(btn =>
+                <button type="button"
+                    key={btn.text}
+                    className={btn.class}
+                    onClick={() => {btn.action(btn.text)}}>
+                        {btn.text}
+                </button>
+            )}
+            {/*<button type="button"
+                    className={activeBtnClass}>
                     Все сотрудники
             </button>
             <button type="button"
-                    className="btn btn-outline-light">
+                    className={btnClass}
+                    onClick={() => {increaseFilter()}}>
                     На повышение
             </button>
             <button type="button"
-                    className="btn btn-outline-light">
+                    className={btnClass}>
                     З/П больше 1000$
-            </button>
+            </button>*/}
         </div>
     )
 }

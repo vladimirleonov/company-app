@@ -9,6 +9,7 @@ const EmployeesAddForm = ({addNewUser}) => {
     const onHandleSubmit = (e) => {
         e.preventDefault();
         addNewUser(newUserData.name, newUserData.salary);
+        setNewUserData({name: '', salary: ''})
     }
 
     const setNewUserName = (e) => {
@@ -29,12 +30,15 @@ const EmployeesAddForm = ({addNewUser}) => {
                     onChange={(e) => {setNewUserName(e)}}
                     type="text"
                     className="form-control new-post-label"
-                    placeholder="Как его зовут?" />
+                    placeholder="Как его зовут?"
+                    value={newUserData.name}
+                />
                 <input type="number"
                     onChange={(e)=>{setNewUserSalary(e)}}
                     className="form-control new-post-label"
-                    placeholder="З/П в $?" />
-
+                    placeholder="З/П в $?"
+                    value={newUserData.salary}
+                />
                 <button type="submit"
                         className="btn btn-outline-light">Добавить</button>
             </form>

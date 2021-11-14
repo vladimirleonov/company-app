@@ -9,6 +9,7 @@ const EmployeesList = ({data, ...props}) => {
                 <EmployeesListItem key={item.id}
                                    {...item}
                                    changeIncrease={props.changeIncrease}
+                                   deleteUser={props.deleteUser}
                 />)
             }
         </ul>
