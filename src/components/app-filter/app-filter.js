@@ -1,15 +1,20 @@
 import "./app-filter.css";
 
-const AppFilter = ({filterBtns}) => {
+const AppFilter = () => {
+
+    const filterBtns = [
+        { name: 'Все сотрудники' },
+        { name: 'На повышение' },
+        { name: 'З/П больше 1000$' }
+    ]
 
     return (
         <div className="btn-group">
             {filterBtns.map(btn =>
                 <button type="button"
-                    key={btn.text}
-                    className={btn.class}
-                    onClick={() => {btn.action(btn.text)}}>
-                        {btn.text}
+                    key={btn.name}
+                    className={btn.class}>
+                        {btn.name}
                 </button>
             )}
             {/*<button type="button"
