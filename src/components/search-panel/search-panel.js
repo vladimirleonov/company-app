@@ -1,17 +1,17 @@
 import './search-panel.css';
 
-const SearchPanel = ({filterData}) => {
+const SearchPanel = ({setSearchField}) => {
 
-    const onFilterData = (e) => {
+    const onSetSearchField = (e) => {
         console.log(e.currentTarget.value);
-        filterData(e.currentTarget.value);
+        setSearchField(e.currentTarget.value);
     }
 
     return (
         <input type="text"
                 className="form-control search-input"
                 placeholder="Найти сотрудника"
-                onChange={onFilterData}/>
+                onChange={onSetSearchField}/>
     )
 }
 

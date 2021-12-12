@@ -11,10 +11,12 @@ import './App.css';
 function App() {
 
     const [data, setData] = useState([
-        {id: 1 ,name: 'John Smith', salary: '500', increase: true, rise: true},
+        {id: 1 ,name: 'John Smith', salary: '500', increase: true, rise: false},
         {id: 2 ,name: 'Mike Pole', salary: '1000', increase: false, rise: false},
         {id: 3 ,name: 'Alex Stone', salary: '3000', increase: false, rise: false}
     ]);
+
+    const [searchField, setSearchField] = useState('');
 
     const toggleIncrease = (id) => {
         setData(data.map(item => {
@@ -49,18 +51,25 @@ function App() {
     }
 
     const filterData = (data, value) => {
-
+        if(data && value) {
+            return data.filter(item => item.name.toLowerCase().includes(value.toLowerCase()));
+        } else {
+            return data
+        }
     }
 
-    let filteredData = filterData(data, );
+    const employees = data.length;
+    const increased = data.filter(item => item.increase == true).length;
+
+    let filteredData = filterData(data, searchField);
 
     return (
 
         <div className="app">
-            <AppInfo />
+            <AppInfo employees={employees} increased={increased}/>
 
             <div className="search-panel">
-                <SearchPanel filterData={filterData}/>
+                <SearchPanel setSearchField={setSearchField}/>
                 <AppFilter/>
             </div>
 
