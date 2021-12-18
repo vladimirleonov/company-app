@@ -10,13 +10,16 @@ import './App.css';
 
 function App() {
 
+    //increase - higher salary
+    //rise - higher position
     const [data, setData] = useState([
-        {id: 1 ,name: 'John Smith', salary: '500', increase: true, rise: false},
-        {id: 2 ,name: 'Mike Pole', salary: '1000', increase: false, rise: false},
-        {id: 3 ,name: 'Alex Stone', salary: '3000', increase: false, rise: false}
+        {id: 1 ,name: 'John Smith', salary: 500, increase: true, rise: false},
+        {id: 2 ,name: 'Mike Pole', salary: 1000, increase: false, rise: true},
+        {id: 3 ,name: 'Alex Stone', salary: 3000, increase: false, rise: true}
     ]);
 
     const [searchField, setSearchField] = useState('');
+    const [filterValue, setFilterValue] = useState('all');
 
     const toggleIncrease = (id) => {
         setData(data.map(item => {
@@ -46,11 +49,12 @@ function App() {
 
     const deleteUser = (id) => {
         setData(
-            filteredData.data(item => item.id != id)
+            data.filter(item => item.id != id)
         )
     }
 
-    const filterData = (data, value) => {
+    const searchFilter = (data, value) => {
+        console.log(value);
         if(data && value) {
             return data.filter(item => item.name.toLowerCase().includes(value.toLowerCase()));
         } else {
@@ -58,10 +62,26 @@ function App() {
         }
     }
 
+    const btnsFilter = (data, filter) => {
+        console.log(filter);
+        switch (filter) {
+            case 'rise': {
+                return data.filter(item => item.rise == true)
+            }
+            case 'salary': {
+                return data.filter(item => item.salary > 1000)
+            }
+            default : {
+                return data
+            }
+        }
+    }
+
     const employees = data.length;
     const increased = data.filter(item => item.increase == true).length;
 
-    let filteredData = filterData(data, searchField);
+    //show data which have been filtered by search and then by filter btns
+    let visibleData = btnsFilter(searchFilter(data, searchField), filterValue);
 
     return (
 
@@ -70,10 +90,10 @@ function App() {
 
             <div className="search-panel">
                 <SearchPanel setSearchField={setSearchField}/>
-                <AppFilter/>
+                <AppFilter filterValue={filterValue} setFilterValue={setFilterValue}/>
             </div>
 
-            <EmployeesList data={filteredData}
+            <EmployeesList data={visibleData}
                            toggleIncrease={toggleIncrease}
                            toggleRise={toggleRise}
                            deleteUser={deleteUser}/>
