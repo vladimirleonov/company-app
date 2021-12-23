@@ -18,27 +18,27 @@ function App() {
         {id: 3 ,name: 'Alex Stone', salary: 3000, increase: false, rise: true}
     ]);
 
-    const [searchField, setSearchField] = useState('');
+    const [searchField, updataSearchField] = useState('');
     const [filterValue, setFilterValue] = useState('all');
 
-    const toggleIncrease = (id) => {
+    const onToggleProp = (id, prop) => {
         setData(data.map(item => {
             if(item.id != id) {
                 return {...item}
             } else {
-                return {...item, increase: !item.increase}
+                return {...item, [prop]: !item[prop]}
             }
         }))
     }
 
-    const toggleRise = (id) => {
-        setData(data.map(item => {
-            if(item.id != id) {
-                return {...item}
+    const onChangeSalary = (id, newSalary) => {
+        data.map(item => {
+            if(item.id === id) {
+                return item.salary = newSalary
             } else {
-                return {...item, rise: !item.rise}
+                return item
             }
-        }))
+        })
     }
 
     const addNewUser = (name, salary) => {
@@ -89,13 +89,13 @@ function App() {
             <AppInfo employees={employees} increased={increased}/>
 
             <div className="search-panel">
-                <SearchPanel setSearchField={setSearchField}/>
+                <SearchPanel updataSearchField={updataSearchField}/>
                 <AppFilter filterValue={filterValue} setFilterValue={setFilterValue}/>
             </div>
 
             <EmployeesList data={visibleData}
-                           toggleIncrease={toggleIncrease}
-                           toggleRise={toggleRise}
+                           onChangeSalary={onChangeSalary}
+                           onToggleProp={onToggleProp}
                            deleteUser={deleteUser}/>
             <EmployeesAddForm addNewUser={addNewUser}/>
         </div>

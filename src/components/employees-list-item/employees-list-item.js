@@ -1,6 +1,9 @@
 import './employees-list-item.css';
+import {useEffect, useState} from "react";
 
-const EmployeesListItem = ({id, name, salary, increase, rise, toggleIncrease, toggleRise, deleteUser}) => {
+const EmployeesListItem = ({id, name, salary, increase, rise, onToggleProp, onChangeSalary, deleteUser}) => {
+
+    const [ssalary, setSsalary] = useState('');
 
     let classes = "list-group-item d-flex justify-content-between";
 
@@ -11,12 +14,23 @@ const EmployeesListItem = ({id, name, salary, increase, rise, toggleIncrease, to
         classes += ' like';
     }
 
-    const onToggleIncrease = () => {
-        toggleIncrease(id);
+    useEffect(() => {
+        setSsalary(salary);
+    }, [salary])
+
+    const changeSsalary = (e) => {
+        console.log(e.currentTarget.value.slice(0, -1));
+        setSsalary(e.currentTarget.value.slice(0, -1));
     }
 
-    const onToggleRise = () => {
-        toggleRise(id);
+    const changeSalary = (e) => {
+        console.log(e.currentTarget.value.slice(0, -1));
+        onChangeSalary(id, e.currentTarget.value.slice(0, -1));
+    }
+
+    const toggleProp = (e) => {
+        console.log(e.currentTarget.getAttribute('data-prop'));
+        onToggleProp(id, e.currentTarget.getAttribute('data-prop'));
     }
 
     const onDeleteUser = () => {
@@ -25,12 +39,18 @@ const EmployeesListItem = ({id, name, salary, increase, rise, toggleIncrease, to
 
     return (
         <li className={classes}>
-            <span className="list-group-item-label" onClick={onToggleRise}>{name}</span>
-            <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
+            <span className="list-group-item-label" data-prop="rise" onClick={toggleProp}>{name}</span>
+            <input
+                type="text"
+                onChange={changeSsalary}
+                onBlur={changeSalary}
+                className="list-group-item-input"
+                value={ssalary + '$'}/>
             <div className='d-flex justify-content-center align-items-center'>
                 <button type="button"
                     className="btn-cookie btn-sm "
-                    onClick={onToggleIncrease}>
+                    data-prop="increase"
+                    onClick={toggleProp}>
                     <i className="fas fa-cookie"></i>
                 </button>
 

@@ -1,14 +1,14 @@
 import './search-panel.css';
 import {useState} from "react";
 
-const SearchPanel = ({setSearchField}) => {
+const SearchPanel = ({updataSearchField}) => {
 
-    const [search, updateSearch] = useState('');
+    const [search, onUpdateSearch] = useState('');
 
     const onSetSearchField = (e) => {
         console.log(e.currentTarget.value);
-        updateSearch(e.currentTarget.value);
-        setSearchField(e.currentTarget.value);
+        onUpdateSearch(e.currentTarget.value);
+        updataSearchField(e.currentTarget.value);
     }
 
     return (

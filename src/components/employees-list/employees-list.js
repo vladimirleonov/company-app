@@ -8,8 +8,8 @@ const EmployeesList = ({data, ...props}) => {
             {data.map(item =>
                 <EmployeesListItem key={item.id}
                                    {...item}
-                                   toggleIncrease={props.toggleIncrease}
-                                   toggleRise={props.toggleRise}
+                                   onChangeSalary={props.onChangeSalary}
+                                   onToggleProp={props.onToggleProp}
                                    deleteUser={props.deleteUser}
                 />)
             }

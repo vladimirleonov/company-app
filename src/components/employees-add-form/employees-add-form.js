@@ -29,11 +29,13 @@ const EmployeesAddForm = ({addNewUser}) => {
                 <input
                     onChange={(e) => {setNewUserName(e)}}
                     type="text"
+                    required
                     className="form-control new-post-label"
                     placeholder="Как его зовут?"
                     value={newUserData.name}
                 />
                 <input type="number"
+                    required
                     onChange={(e)=>{setNewUserSalary(e)}}
                     className="form-control new-post-label"
                     placeholder="З/П в $?"
